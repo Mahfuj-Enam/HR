@@ -7,9 +7,6 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 );
 
 const Contact: React.FC = () => {
-    //
-    // --- ✅ PUBLIC KEY ADDED ---
-    //
     const EMAILJS_PUBLIC_KEY = "ZCsFjYTDHqeILe33D";
     const EMAILJS_SERVICE_ID = "service_w92h4ps";
     const EMAILJS_TEMPLATE_ID = "template_3zjvh32";
@@ -18,11 +15,9 @@ const Contact: React.FC = () => {
     const [statusMessage, setStatusMessage] = useState('');
     const [isError, setIsError] = useState(false);
 
-    // FIX: Corrected the event type from HTMLFormFormElement to HTMLFormElement.
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        // FIX: Removed redundant check since the public key is already provided.
         setSubmitting(true);
         setStatusMessage('');
         setIsError(false);
@@ -42,7 +37,11 @@ const Contact: React.FC = () => {
                 setIsError(false);
                 form.reset();
             }, (error: any) => {
-                setStatusMessage("Oops! There was a problem submitting your form.");
+                let errorMessage = "Oops! There was a problem submitting your form.";
+                if (error && error.text) {
+                    errorMessage = `Failed to send: ${error.text}. Please double-check your EmailJS service, template, and variable names ({{name}}, {{email}}, {{message}}).`;
+                }
+                setStatusMessage(errorMessage);
                 setIsError(true);
                 console.error("EmailJS failed to send:", error);
             }).finally(() => {
