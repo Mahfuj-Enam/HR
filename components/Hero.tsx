@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
             
             <div className="relative z-20 text-center p-6 flex flex-col items-center">
                  <img 
-                    src="https://i.ibb.co/XZj5JWby/Joseph-removebg-preview.png" 
+                    src="https://i.ibb.co/twN4fVy2/photo.jpg" 
                     alt="Md. Mahfuj Al Enam"
                     className="w-48 h-48 rounded-full object-cover border-4 border-brand-teal mb-8 shadow-xl transition-transform duration-300 hover:scale-105"
                 />
