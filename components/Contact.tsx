@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-800 dark:text-lightest-slate relative after:content-[''] after:absolute after:w-20 after:h-1 after:bg-brand-teal after:left-1/2 after:-translate-x-1/2 after:bottom-[-1rem]">
@@ -7,72 +7,13 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 );
 
 const Contact: React.FC = () => {
-    const EMAILJS_PUBLIC_KEY = "ZCsFjYTDHqeILe33D";
-    const EMAILJS_SERVICE_ID = "service_w92h4ps";
-    const EMAILJS_TEMPLATE_ID = "template_3zjvh32";
-
-    const [submitting, setSubmitting] = useState(false);
-    const [statusMessage, setStatusMessage] = useState('');
-    const [isError, setIsError] = useState(false);
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        
-        setSubmitting(true);
-        setStatusMessage('');
-        setIsError(false);
-
-        const form = e.target as HTMLFormElement;
-
-        if (!(window as any).emailjs) {
-            setStatusMessage("Email service is not available. Please try again later.");
-            setIsError(true);
-            setSubmitting(false);
-            return;
-        }
-
-        (window as any).emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form, EMAILJS_PUBLIC_KEY)
-            .then(() => {
-                setStatusMessage("Message Sent Successfully!");
-                setIsError(false);
-                form.reset();
-            }, (error: any) => {
-                let errorMessage = "Oops! There was a problem submitting your form.";
-                if (error && error.text) {
-                    errorMessage = `Failed to send: ${error.text}. Please double-check your EmailJS service, template, and variable names ({{name}}, {{email}}, {{message}}).`;
-                }
-                setStatusMessage(errorMessage);
-                setIsError(true);
-                console.error("EmailJS failed to send:", error);
-            }).finally(() => {
-                setSubmitting(false);
-            });
-    };
-
     return (
         <section id="contact" className="py-20 md:py-28">
             <SectionTitle>Get In Touch</SectionTitle>
             <div className="max-w-3xl mx-auto">
                 <p className="text-center mb-8 text-lg text-slate-600 dark:text-slate">
-                    Let’s connect to build stronger people and performance systems. I'm always open to discussing new opportunities, creative ideas or opportunities to be part of your visions.
+                    I'm always open to discussing new opportunities and creative ideas. Feel free to connect with me via LinkedIn, email, phone, or by downloading my CV.
                 </p>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <div>
-                        <input type="text" name="name" placeholder="Your Name" required className="w-full px-4 py-3 bg-gray-200 dark:bg-lightest-navy text-slate-800 dark:text-light-slate rounded-md focus:outline-none focus:ring-2 focus:ring-brand-teal" />
-                    </div>
-                    <div>
-                        <input type="email" name="email" placeholder="Your Email" required className="w-full px-4 py-3 bg-gray-200 dark:bg-lightest-navy text-slate-800 dark:text-light-slate rounded-md focus:outline-none focus:ring-2 focus:ring-brand-teal" />
-                    </div>
-                    <div>
-                        <textarea name="message" placeholder="Your Message" rows={5} required className="w-full px-4 py-3 bg-gray-200 dark:bg-lightest-navy text-slate-800 dark:text-light-slate rounded-md focus:outline-none focus:ring-2 focus:ring-brand-teal"></textarea>
-                    </div>
-                    <div className="text-center">
-                        <button type="submit" disabled={submitting} className="px-8 py-3 bg-brand-teal text-navy font-semibold rounded-md hover:bg-opacity-80 transition-colors duration-300 disabled:bg-opacity-50 disabled:cursor-not-allowed">
-                            {submitting ? 'Sending...' : 'Send Message'}
-                        </button>
-                    </div>
-                </form>
-                {statusMessage && <p className={`text-center mt-4 ${isError ? 'text-red-500' : 'text-green-400'}`}>{statusMessage}</p>}
 
                 <div className="text-center mt-12">
                      <a href="https://drive.google.com/uc?export=download&id=1r9UNwYVemGQQXnt0BecPvgPlXd1dMX9Q" target="_blank" rel="noopener noreferrer" className="inline-block mb-8 px-8 py-3 border-2 border-brand-teal text-brand-teal font-semibold rounded-md hover:bg-brand-teal/10 transition-colors duration-300">
@@ -81,6 +22,7 @@ const Contact: React.FC = () => {
                     <div className="flex justify-center space-x-6">
                         <a href="https://www.linkedin.com/in/md-mahfuj-al-enam/" target="_blank" rel="noopener noreferrer" className="text-slate hover:text-brand-teal transition-colors"><LinkedInIcon /></a>
                         <a href="mailto:mahfuj.enam71@gmail.com" className="text-slate hover:text-brand-teal transition-colors"><EmailIcon /></a>
+                        <a href="tel:+8801818162738" className="text-slate hover:text-brand-teal transition-colors"><PhoneIcon /></a>
                     </div>
                 </div>
             </div>
@@ -98,6 +40,12 @@ const EmailIcon = () => (
      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
     </svg>
+);
+
+const PhoneIcon = () => (
+    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+       <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.02.74-.25 1.02l-2.2 2.2z"/>
+   </svg>
 );
 
 export default Contact;
