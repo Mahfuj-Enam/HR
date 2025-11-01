@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
                 <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-brand-blue tracking-tight drop-shadow-lg mb-4">
                     Md. Mahfuj Al Enam
                 </h1>
-                <p className="text-lg md:text-xl text-lightest-slate font-light uppercase tracking-wider">
+                <p className="text-lg md:text-xl text-lightest-slate font-bold uppercase tracking-wider">
                     HR & Administration Specialist <span className="text-brand-teal mx-2">|</span> Empowering People, Enhancing Performance, Ensuring Compliance
                 </p>
             </div>
