@@ -35,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
         <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-light-navy/80 backdrop-blur-sm shadow-lg' : 'bg-transparent'}`}>
             <nav className="container mx-auto px-6 md:px-12 py-4">
                 <div className="flex items-center justify-between">
-                    <a href="#home" className="text-xl font-bold text-brand-teal">
+                    <a href="#home" className="text-xl font-bold text-brand-teal tracking-wide">
                         Md. Mahfuj Al Enam
                     </a>
                     <div className="hidden md:flex items-center space-x-2">
