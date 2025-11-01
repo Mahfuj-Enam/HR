@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { SKILLS } from '../constants';
+import { SKILLS_CATEGORIZED } from '../constants';
 import type { Skill } from '../types';
 import { useInView } from '../hooks/useInView';
 
@@ -41,9 +40,16 @@ const Skills: React.FC = () => {
     return (
         <section id="skills" className="py-20 md:py-28">
             <SectionTitle>Core Competencies</SectionTitle>
-            <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
-                {SKILLS.map((skill) => (
-                    <SkillBar key={skill.name} skill={skill} />
+            <div className="space-y-12">
+                {Object.entries(SKILLS_CATEGORIZED).map(([category, skills]) => (
+                    <div key={category}>
+                        <h3 className="text-2xl font-semibold mb-6 text-slate-800 dark:text-lightest-slate">{category}</h3>
+                        <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+                            {skills.map((skill) => (
+                                <SkillBar key={skill.name} skill={skill} />
+                            ))}
+                        </div>
+                    </div>
                 ))}
             </div>
         </section>

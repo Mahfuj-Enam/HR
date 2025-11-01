@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
+import Projects from './components/Projects';
 import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -24,7 +24,7 @@ export default function App() {
     }, [darkMode]);
     
     return (
-        <div className="bg-gray-100 dark:bg-navy text-slate-700 dark:text-light-slate transition-colors duration-300">
+        <div className="bg-gray-50 dark:bg-navy text-slate-700 dark:text-light-slate transition-colors duration-300">
             <Header darkMode={darkMode} setDarkMode={setDarkMode} />
             <main>
                 <Hero />
@@ -32,7 +32,10 @@ export default function App() {
                     <About />
                     <Experience />
                     <Skills />
-                    <Achievements />
+                </div>
+                <Projects />
+                <Achievements />
+                <div className="container mx-auto px-6 md:px-12">
                     <Contact />
                 </div>
             </main>

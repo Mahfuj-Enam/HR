@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -14,10 +13,10 @@ const About: React.FC = () => {
             <div className="grid md:grid-cols-5 gap-10 items-center">
                 <div className="md:col-span-3 text-lg text-slate-600 dark:text-slate leading-relaxed">
                     <p className="mb-4">
-                        With over 8 years of dedicated experience in Human Resources and Administration, I have developed a comprehensive skill set in driving organizational success through effective people management. My expertise spans across the full HR lifecycle, from recruitment and onboarding to performance management and policy implementation.
+                        A seasoned HR & Administration professional with over 7 years of experience across the manufacturing and IT sectors. My expertise lies in building robust HR frameworks that drive performance, ensure compliance, and foster a positive work environment.
                     </p>
                     <p>
-                        I am passionate about creating positive and compliant workplace cultures where employees can thrive. My background in law provides a solid foundation for ensuring robust HR compliance and navigating complex labor regulations.
+                        I specialize in recruitment, KPI-based performance management, HR policy development, and labor law compliance. I am passionate about creating transparent, data-driven, and people-centric workplaces where both the organization and its employees can achieve their full potential.
                     </p>
                 </div>
                 <div className="md:col-span-2 bg-white dark:bg-light-navy p-6 rounded-lg shadow-lg">
@@ -26,7 +25,7 @@ const About: React.FC = () => {
                         <li className="flex items-start">
                             <CheckIcon />
                             <div>
-                                <span className="font-bold block">Skills:</span> Recruitment, KPI-based Performance Management, HR Policy & Compliance, C&B, HRIS, Labor Law.
+                                <span className="font-bold block">Core Skills:</span> Recruitment, Performance Management, HR Policy & Compliance, C&B, HRIS, Labor Law.
                             </div>
                         </li>
                         <li className="flex items-start">

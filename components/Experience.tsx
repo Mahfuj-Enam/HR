@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { EXPERIENCES } from '../constants';
 
@@ -19,11 +18,22 @@ const Experience: React.FC = () => {
                             <span className="text-brand-teal font-semibold text-sm">{job.period}</span>
                             <h3 className="text-xl font-bold mt-1 text-slate-800 dark:text-lightest-slate">{job.role}</h3>
                             <p className="text-slate-500 dark:text-slate mb-4">{job.company}</p>
-                            <ul className="space-y-2 list-disc list-inside text-slate-600 dark:text-light-slate">
+                            <p className="font-semibold text-slate-700 dark:text-light-slate mb-2">Key Responsibilities:</p>
+                            <ul className="space-y-2 list-disc list-inside text-slate-600 dark:text-light-slate mb-4">
                                 {job.responsibilities.map((resp, i) => (
                                     <li key={i}>{resp}</li>
                                 ))}
                             </ul>
+                             {job.achievements && (
+                                <>
+                                    <p className="font-semibold text-slate-700 dark:text-light-slate mb-2">Key Achievements:</p>
+                                    <ul className="space-y-2 list-disc list-inside text-slate-600 dark:text-light-slate">
+                                        {job.achievements.map((ach, i) => (
+                                            <li key={i}>{ach}</li>
+                                        ))}
+                                    </ul>
+                                </>
+                            )}
                         </div>
                     </div>
                 ))}

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 interface HeaderProps {
@@ -28,6 +27,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
         { href: '#about', text: 'About' },
         { href: '#experience', text: 'Experience' },
         { href: '#skills', text: 'Skills' },
+        { href: '#projects', text: 'Projects' },
         { href: '#contact', text: 'Contact' },
     ];
 
