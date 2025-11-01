@@ -14,15 +14,8 @@ const Hero: React.FC = () => {
                     Md. Mahfuj Al Enam
                 </h1>
                 <p className="text-lg md:text-xl text-lightest-slate font-light uppercase tracking-wider">
-                    HR & Administration Specialist <span className="text-brand-teal mx-2">|</span> Driving People, Performance & Compliance
+                    HR & Administration Specialist <span className="text-brand-teal mx-2">|</span> Empowering People, Enhancing Performance, Ensuring Compliance
                 </p>
-            </div>
-             <div className="absolute bottom-10 z-20">
-                <a href="#about" aria-label="Scroll down">
-                    <div className="w-6 h-10 border-2 rounded-full flex justify-center items-start p-1">
-                        <div className="w-1 h-2 bg-brand-teal rounded-full animate-bounce"></div>
-                    </div>
-                </a>
             </div>
         </section>
     );
