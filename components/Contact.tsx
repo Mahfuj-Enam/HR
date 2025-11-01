@@ -7,19 +7,47 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 );
 
 const Contact: React.FC = () => {
-    const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-    const [submitted, setSubmitted] = useState(false);
+    //
+    // --- ✅ PUBLIC KEY ADDED ---
+    //
+    const EMAILJS_PUBLIC_KEY = "ZCsFjYTDHqeILe33D";
+    const EMAILJS_SERVICE_ID = "service_w92h4ps";
+    const EMAILJS_TEMPLATE_ID = "template_3zjvh32";
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormState({ ...formState, [e.target.name]: e.target.value });
-    };
+    const [submitting, setSubmitting] = useState(false);
+    const [statusMessage, setStatusMessage] = useState('');
+    const [isError, setIsError] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    // FIX: Corrected the event type from HTMLFormFormElement to HTMLFormElement.
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('Form submitted:', formState);
-        setSubmitted(true);
-        setFormState({ name: '', email: '', message: '' });
-        setTimeout(() => setSubmitted(false), 5000);
+        
+        // FIX: Removed redundant check since the public key is already provided.
+        setSubmitting(true);
+        setStatusMessage('');
+        setIsError(false);
+
+        const form = e.target as HTMLFormElement;
+
+        if (!(window as any).emailjs) {
+            setStatusMessage("Email service is not available. Please try again later.");
+            setIsError(true);
+            setSubmitting(false);
+            return;
+        }
+
+        (window as any).emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form, EMAILJS_PUBLIC_KEY)
+            .then(() => {
+                setStatusMessage("Message Sent Successfully!");
+                setIsError(false);
+                form.reset();
+            }, (error: any) => {
+                setStatusMessage("Oops! There was a problem submitting your form.");
+                setIsError(true);
+                console.error("EmailJS failed to send:", error);
+            }).finally(() => {
+                setSubmitting(false);
+            });
     };
 
     return (
@@ -31,21 +59,21 @@ const Contact: React.FC = () => {
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <input type="text" name="name" placeholder="Your Name" value={formState.name} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-200 dark:bg-lightest-navy text-slate-800 dark:text-light-slate rounded-md focus:outline-none focus:ring-2 focus:ring-brand-teal" />
+                        <input type="text" name="name" placeholder="Your Name" required className="w-full px-4 py-3 bg-gray-200 dark:bg-lightest-navy text-slate-800 dark:text-light-slate rounded-md focus:outline-none focus:ring-2 focus:ring-brand-teal" />
                     </div>
                     <div>
-                        <input type="email" name="email" placeholder="Your Email" value={formState.email} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-200 dark:bg-lightest-navy text-slate-800 dark:text-light-slate rounded-md focus:outline-none focus:ring-2 focus:ring-brand-teal" />
+                        <input type="email" name="email" placeholder="Your Email" required className="w-full px-4 py-3 bg-gray-200 dark:bg-lightest-navy text-slate-800 dark:text-light-slate rounded-md focus:outline-none focus:ring-2 focus:ring-brand-teal" />
                     </div>
                     <div>
-                        <textarea name="message" placeholder="Your Message" rows={5} value={formState.message} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-200 dark:bg-lightest-navy text-slate-800 dark:text-light-slate rounded-md focus:outline-none focus:ring-2 focus:ring-brand-teal"></textarea>
+                        <textarea name="message" placeholder="Your Message" rows={5} required className="w-full px-4 py-3 bg-gray-200 dark:bg-lightest-navy text-slate-800 dark:text-light-slate rounded-md focus:outline-none focus:ring-2 focus:ring-brand-teal"></textarea>
                     </div>
                     <div className="text-center">
-                        <button type="submit" className="px-8 py-3 bg-brand-teal text-navy font-semibold rounded-md hover:bg-opacity-80 transition-colors duration-300">
-                            Send Message
+                        <button type="submit" disabled={submitting} className="px-8 py-3 bg-brand-teal text-navy font-semibold rounded-md hover:bg-opacity-80 transition-colors duration-300 disabled:bg-opacity-50 disabled:cursor-not-allowed">
+                            {submitting ? 'Sending...' : 'Send Message'}
                         </button>
                     </div>
                 </form>
-                {submitted && <p className="text-center mt-4 text-green-400">Message Sent Successfully!</p>}
+                {statusMessage && <p className={`text-center mt-4 ${isError ? 'text-red-500' : 'text-green-400'}`}>{statusMessage}</p>}
 
                 <div className="text-center mt-12">
                      <a href="https://drive.google.com/uc?export=download&id=1r9UNwYVemGQQXnt0BecPvgPlXd1dMX9Q" target="_blank" rel="noopener noreferrer" className="inline-block mb-8 px-8 py-3 border-2 border-brand-teal text-brand-teal font-semibold rounded-md hover:bg-brand-teal/10 transition-colors duration-300">
