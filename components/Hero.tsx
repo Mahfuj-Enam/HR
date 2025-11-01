@@ -8,9 +8,9 @@ const Hero: React.FC = () => {
             
             <div className="relative z-20 text-center p-6 flex flex-col items-center">
                  <img 
-                    src="https://i.ibb.co/twN4fVy2/photo.jpg" 
+                    src="https://i.ibb.co/vxKVQ2Ym/rsz-1photo.png" 
                     alt="Md. Mahfuj Al Enam"
-                    className="w-48 h-48 rounded-full object-cover border-4 border-brand-teal mb-8 shadow-xl transition-transform duration-300 hover:scale-105"
+                    className="w-52 h-52 rounded-full object-cover mb-8 shadow-xl transition-transform duration-300 hover:scale-105"
                 />
                 <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-brand-blue tracking-tight drop-shadow-lg mb-4 leading-normal py-2">
                     Md. Mahfuj Al Enam
